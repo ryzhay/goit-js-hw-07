@@ -6,7 +6,6 @@ const itemsMarkup = createMarkup(galleryItems);
 
 gallery.insertAdjacentHTML('beforeend', itemsMarkup);
 gallery.addEventListener('click', onItemClick);
-gallery.addEventListener('keydown', onEscClose);
 
 function createMarkup(galleryItems){
     return galleryItems.map(({preview, original, description}) => {
@@ -32,11 +31,11 @@ function onItemClick(event) {
 `);
 instance.show();
 
-};
+gallery.addEventListener('keydown', (event) => {
+  if(event.code === 'Escape') {
+      instance.close();
+  }
+  });
 
-function onEscClose(event){
-    if(event.code === 'Escape') {
-        instance.close();
-    }
-    };
+};
 console.log(galleryItems);
